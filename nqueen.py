@@ -101,7 +101,7 @@ def mutate(gene):
 
 def main():
   N = int(input("Enter Number of Queens on Board: "))
-  start_time = time.time()
+  start_time = time.process_time()
   population = generate(100,N)
   flag = 1
   x = list()
@@ -121,6 +121,8 @@ def main():
         print()
       break
     print("Generation ",i," with fitness value: ",fitness_value(population[0]),end='\r')
+    if((i%100)==0):
+      print()
     # sys.stdout.flush()
     gene1 = population[random.randint(0,99)]
     for j in range(4):
@@ -155,7 +157,7 @@ def main():
         else:
           print('.',end="")
       print()
-  print("Total time taken: %s seconds" % (time.time() - start_time))
+  print("Total time taken: %s seconds" % (time.process_time() - start_time))
   plt.plot(x, y)
   plt.xlabel('Generation')
   plt.ylabel('Fitness Value')
