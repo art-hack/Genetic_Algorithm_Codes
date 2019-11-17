@@ -1,5 +1,6 @@
 import random
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+import time
 import sys
 
 
@@ -100,6 +101,7 @@ def mutate(gene):
 
 def main():
   N = int(input("Enter Number of Queens on Board: "))
+  start_time = time.time()
   population = generate(100,N)
   flag = 1
   x = list()
@@ -119,7 +121,7 @@ def main():
         print()
       break
     print("Generation ",i," with fitness value: ",fitness_value(population[0]),end='\r')
-    sys.stdout.flush()
+    # sys.stdout.flush()
     gene1 = population[random.randint(0,99)]
     for j in range(4):
       gen = population[random.randint(0,99)]
@@ -153,7 +155,7 @@ def main():
         else:
           print('.',end="")
       print()
-
+  print("Total time taken: %s seconds" % (time.time() - start_time))
   plt.plot(x, y)
   plt.xlabel('Generation')
   plt.ylabel('Fitness Value')
