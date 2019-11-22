@@ -123,7 +123,7 @@ def main():
     print("Generation ",i," with fitness value: ",fitness_value(population[0]),end='\r')
     if((i%100)==0):
       print()
-    # sys.stdout.flush()
+    sys.stdout.flush()
     gene1 = population[random.randint(0,99)]
     for j in range(4):
       gen = population[random.randint(0,99)]
