@@ -28,29 +28,6 @@ def filter(gene):
   return new_gene
 
 
-def bisect(lst, value, key=None):
-    if key is None:
-        key = lambda x: x
-    def bis(lo, hi=len(lst)):
-        while lo < hi:
-            mid = (lo + hi) // 2
-            if key(lst[mid]) > value:
-                lo = mid + 1
-            else:
-                hi = mid
-        return lo
-    return bis(0)
-
-
-def insert(gene, population):
-  val = fitness_value(gene)
-  val2 = bisect(population,val,fitness_value)
-  p = population[0:val2]
-  p.append(gene)
-  p.extend(population[val2:])
-  return p
-
-
 def generate(n,length):
   population = list()
   te=list()
@@ -62,7 +39,7 @@ def generate(n,length):
     temp=list()
     for j in range(length):
       temp.append(random.randint(0,1))
-    population = insert(filter(temp),population)
+    population.append(filter(temp))
   return population
 
 
@@ -86,10 +63,10 @@ def main():
   global MAX_WEIGHT
   temp = int(1000)
   for i in range(N):
-    a = random.randint(10,100)
+    a = random.randint(10,20)
     temp = min(temp,a)
     weight.append(a)
-    value.append(random.randint(10,100))
+    value.append(random.randint(10,20))
   MAX_WEIGHT = int(10*temp)
   
   print("Weights: ",end="")
@@ -103,7 +80,7 @@ def main():
   print("Capacity: ",MAX_WEIGHT)
   print()
   population = generate(500,N)
-
+  population = sorted(population,reverse=True,key=fitness_value)
   x = list()
   y = list()
   MAX_GENERATIONS = int(500)
@@ -128,9 +105,10 @@ def main():
       gene1,gene2 = crossover(gene1,gene2)
       gene1 = mutate(gene1)
       gene2 = mutate(gene2)
-      population = insert(gene1,population)
-      population = insert(gene2,population)
-    
+      population.append(gene1)
+      population.append(gene2)
+      population = sorted(population,reverse=True,key=fitness_value)
+
     while(len(population)>500):
       population.pop()
     x.append(i)
@@ -156,5 +134,5 @@ def main():
   plt.title('Fitness Function Graph')
   plt.show()
 
-random.seed(545)
+random.seed(454)
 main()
