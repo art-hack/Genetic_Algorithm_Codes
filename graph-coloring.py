@@ -12,31 +12,7 @@ def fitness_value(gene):
       if(adj[i][j]==1 and i!=j):
         if(gene[i]==gene[j]):
           conflicts+=1
-          # print(str(i)+" "+str(j))
   return (conflicts/2)
-
-
-# def bisect(lst, value, key=None):
-#     if key is None:
-#         key = lambda x: x
-#     def bis(lo, hi=len(lst)):
-#         while lo < hi:
-#             mid = (lo + hi) // 2
-#             if key(lst[mid]) < value:
-#                 lo = mid + 1
-#             else:
-#                 hi = mid
-#         return lo
-#     return bis(0)
-
-
-# def insert(gene, population):
-#   val = fitness_value(gene)
-#   val2 = bisect(population,val,fitness_value)
-#   p = population[0:val2]
-#   p.append(gene)
-#   p.extend(population[val2:])
-#   return p
 
 
 def generate(n,color,length):
@@ -156,8 +132,3 @@ def main():
 
 random.seed(36)
 main()
-# generate_g545raph(10,10,10)
-# for i in range(len(adj)):
-#   for j in range(len(adj[i])):
-#     print(adj[i][j],end=" ")
-#   print()
